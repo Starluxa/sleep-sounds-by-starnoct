@@ -1,0 +1,46 @@
+<best_practices>
+  <principles>
+    <principle priority="high">
+      <rule>Orchestrate only; do not implement.</rule>
+      <rationale>
+        This mode must never change application behavior directly. All code changes must be performed
+        by delegated subtasks in code mode.
+      </rationale>
+    </principle>
+
+    <principle priority="high">
+      <rule>Minimum 10 subtasks (unless user explicitly requests more).</rule>
+      <rationale>
+        Enforces decomposition and reduces the risk of missing scope.
+      </rationale>
+    </principle>
+
+    <principle priority="high">
+      <rule>Preserve offline access and existing features.</rule>
+      <rationale>
+        This repository appears to include offline/service-worker concerns; all delegated work must
+        treat offline behavior and feature stability as non-negotiable constraints.
+      </rationale>
+    </principle>
+  </principles>
+
+  <quality_gates>
+    <gate name="before_delegation">
+      <check>Plan MD file exists and contains 10 numbered subtasks.</check>
+      <check>Todo list created via update_todo_list matches the plan numbering.</check>
+      <check>Context7 queries captured in plan MD under a "Best Practices" section.</check>
+    </gate>
+
+    <gate name="after_each_subtask">
+      <check>Append subtask result verbatim into plan MD under "Subtask X Results".</check>
+      <check>Update todo list: mark that subtask [x] complete.</check>
+    </gate>
+
+    <gate name="final_review">
+      <check>Re-read all files changed/created by subtasks.</check>
+      <check>Verify deletions are actually deleted (no dangling imports/refs).</check>
+      <check>Ultra-honest report appended to plan MD.</check>
+    </gate>
+  </quality_gates>
+</best_practices>
+

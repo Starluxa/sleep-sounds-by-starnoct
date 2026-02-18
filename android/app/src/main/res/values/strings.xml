@@ -1,0 +1,7 @@
+<?xml version='1.0' encoding='utf-8'?>
+<resources>
+    <string name="app_name">Sleep Sounds by StarNoct</string>
+    <string name="title_activity_main">Sleep Sounds by StarNoct</string>
+    <string name="package_name">com.starnoct.sleepsounds</string>
+    <string name="custom_url_scheme">com.starnoct.sleepsounds</string>
+</resources>

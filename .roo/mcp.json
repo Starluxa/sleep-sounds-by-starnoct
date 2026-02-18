@@ -1,0 +1,19 @@
+{
+  "mcpServers": {
+    "context7": {
+      "command": "npx",
+      "args": [
+        "-y",
+        "@upstash/context7-mcp"
+      ],
+      "env": {
+        "DEFAULT_MINIMUM_TOKENS": ""
+      },
+      "alwaysAllow": [
+        "resolve-library-id",
+        "get-library-docs",
+        "get-library-docs</name>\n<arguments>\n{\"context7CompatibleLibraryID\": \"/websites/nextjs\", \"topic\": \"es module commonjs configuration conflicts postcss\"}\n</arguments>\n</use_mcp_tool>"
+      ]
+    }
+  }
+}

@@ -1,0 +1,18 @@
+<reporting_and_review>
+  <plan_md_requirements>
+    <requirement>Include a "Subtasks" section listing Subtask 1..10 with one-sentence scopes.</requirement>
+    <requirement>Include a "Best Practices (Context7)" section with bullet points and links/snippets.</requirement>
+    <requirement>Include an "Append-Only Log" section where each subtask result is appended.</requirement>
+  </plan_md_requirements>
+
+  <final_review_report>
+    <must_include>
+      <item>Whether the original user demand was fully met (yes/no/partial) and why.</item>
+      <item>Offline behavior impact: preserved / at risk / broken (and evidence).</item>
+      <item>List of all files created/edited/deleted across all subtasks (aggregate).</item>
+      <item>Any unintended changes: what changed, where, why it likely happened, how to revert.</item>
+      <item>Known issues not solved: root cause hypotheses and next steps.</item>
+    </must_include>
+  </final_review_report>
+</reporting_and_review>
+

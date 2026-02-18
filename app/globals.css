@@ -1,0 +1,491 @@
+@import "tailwindcss";
+
+/* Definition of the design system. All colors, gradients, fonts, etc should be defined here.
+All colors MUST be HSL.
+*/
+
+/* Cosmetic performance improvement: undefined vars turn into null when called instead of error */
+:root {
+  --background: 230 35% 7%;
+  --foreground: 210 40% 98%;
+  --foreground-strong: 210 40% 100%;
+
+  --card: 230 30% 10%;
+  --card-foreground: 210 40% 98%;
+
+  --popover: 230 30% 10%;
+  --popover-foreground: 210 40% 98%;
+
+  --primary: 190 95% 65%;
+  --primary-foreground: 230 35% 7%;
+
+  --secondary: 250 60% 50%;
+  --secondary-foreground: 210 40% 98%;
+
+  --muted: 230 25% 15%;
+  --muted-foreground: 215 20% 65%;
+
+
+  --destructive: 0 84% 60%;
+  --destructive-foreground: 210 40% 98%;
+
+  --border: 230 25% 20%;
+  --input: 230 25% 15%;
+  --ring: 190 95% 65%;
+
+  --radius: 1rem;
+
+  --sidebar-background: 230 30% 10%;
+  --sidebar-foreground: 210 40% 98%;
+  --sidebar-primary: 190 95% 65%;
+  --sidebar-primary-foreground: 230 35% 7%;
+  --sidebar-accent: 230 25% 15%;
+  --sidebar-accent-foreground: 210 40% 98%;
+  --sidebar-border: 230 25% 20%;
+  --sidebar-ring: 190 95% 65%;
+
+  --safe-area-top: env(safe-area-inset-top);
+  --safe-area-bottom: env(safe-area-inset-bottom);
+  --safe-area-left: env(safe-area-inset-left);
+  --safe-area-right: env(safe-area-inset-right);
+
+  --bottom-nav-height: 64px;
+}
+
+:root {
+  /* Cosmic Starry Theme - Deep Space Colors */
+  --background: 230 35% 7%;
+  --foreground: 210 40% 98%;
+
+  --card: 230 30% 10%;
+  --card-foreground: 210 40% 98%;
+
+  --popover: 230 30% 10%;
+  --popover-foreground: 210 40% 98%;
+
+  --primary: 190 95% 65%;
+  --primary-foreground: 230 35% 7%;
+
+  --secondary: 250 60% 50%;
+  --secondary-foreground: 210 40% 98%;
+
+  --muted: 230 25% 15%;
+  --muted-foreground: 215 20% 65%;
+
+  --destructive: 0 84% 60%;
+  --destructive-foreground: 210 40% 98%;
+
+  --border: 230 25% 20%;
+  --input: 230 25% 15%;
+  --ring: 190 95% 65%;
+
+  --radius: 1rem;
+
+
+  --sidebar-background: 230 30% 10%;
+  --sidebar-foreground: 210 40% 98%;
+  --sidebar-primary: 190 95% 65%;
+  --sidebar-primary-foreground: 230 35% 7%;
+  --sidebar-accent: 230 25% 15%;
+  --sidebar-accent-foreground: 210 40% 98%;
+  --sidebar-border: 230 25% 20%;
+  --sidebar-ring: 190 95% 65%;
+}
+
+* {
+  border-color: hsl(var(--border));
+}
+
+/* Improve heading contrast and focus styles for accessibility */
+h2, h1, h3, h4 {
+  color: hsl(var(--foreground-strong));
+  text-shadow: 0 1px 0 rgba(0,0,0,0.25);
+}
+
+/* Make interactive links and buttons have visible focus ring and adequate contrast */
+a, button, [role="button"] {
+  outline-offset: 3px;
+}
+a:focus, button:focus, [role="button"]:focus {
+  box-shadow: 0 0 0 3px rgba(99,102,241,0.6);
+  outline: none;
+}
+
+/* Ensure link text is underlined on hover and focus for high contrast */
+a {
+  text-decoration-skip-ink: auto;
+}
+a:hover, a:focus {
+  text-decoration: underline;
+}
+
+/* Provide accessible focus for custom interactive elements */
+[tabindex]:focus {
+  box-shadow: 0 0 0 3px rgba(99,102,241,0.6);
+  outline: none;
+}
+
+body {
+  background: linear-gradient(
+    to bottom,
+    hsl(230, 35%, 7%) 0%,
+    hsl(240, 40%, 10%) 50%,
+    hsl(250, 40%, 12%) 100%
+  );
+  color: hsl(var(--foreground));
+  min-height: 100vh;
+}
+
+/* Active Sounds Bar scroll area:
+   - Keep scroll functionality
+   - Minimal, app-matching scrollbar (subtle + appears on hover)
+   - Cross-browser: Firefox uses scrollbar-color/width; WebKit uses pseudo-elements
+*/
+.active-sounds-scroll {
+  scrollbar-width: thin;
+  /* thumb / track */
+  /* sleepy purple */
+  scrollbar-color: rgba(192, 132, 252, 0.55) rgba(0, 0, 0, 0);
+}
+
+.active-sounds-scroll::-webkit-scrollbar {
+  width: 6px;
+}
+
+.active-sounds-scroll::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+/* Hidden until hover (keeps layout stable, but visually minimal) */
+.active-sounds-scroll::-webkit-scrollbar-thumb {
+  background: transparent;
+  border-radius: 999px;
+}
+
+.active-sounds-scroll:hover::-webkit-scrollbar-thumb {
+  background: rgba(192, 132, 252, 0.35);
+}
+
+.active-sounds-scroll:hover::-webkit-scrollbar-thumb:hover {
+  background: rgba(192, 132, 252, 0.55);
+}
+/* Hide scrollbar for tools row and other horizontal scroll areas */
+.scrollbar-hide {
+  &::-webkit-scrollbar {
+    display: none;
+  }
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+/* Bright icon only for paused play button - smooth 2s fade in, 1s bright, 2s fade out, 10s off */
+@keyframes glow-pulse {
+  /* Start: Normal (0s) */
+  0% {
+    filter: brightness(1);
+  }
+  /* Peak: Fully bright (2s = 13.33%) - browser interpolates smoothly */
+  13.33% {
+    filter: brightness(2);
+  }
+  /* Hold peak (3s = 20%) */
+  20% {
+    filter: brightness(2);
+  }
+  /* End fade out: Back to normal (5s = 33.33%) - browser interpolates smoothly */
+  33.33% {
+    filter: brightness(1);
+  }
+  /* Stay normal until end (15s = 100%) */
+  100% {
+    filter: brightness(1);
+  }
+}
+
+.animate-pulse-slow {
+  animation: glow-pulse 15s ease-in-out infinite;
+}
+
+/* ===== Onboarding Animations ===== */
+
+/* Moon rocking animation */
+@keyframes rock {
+  0%, 100% {
+    transform: rotate(-3deg);
+  }
+  50% {
+    transform: rotate(3deg);
+  }
+}
+
+.animate-rock {
+  animation: rock var(--rock-duration, 3s) var(--rock-easing, ease-in-out) infinite;
+  transform-box: fill-box;
+  will-change: transform;
+}
+
+/* Bounce in animation for buttons */
+@keyframes bounce-in {
+  0% {
+    opacity: 0;
+    transform: scale(0.9) translateY(10px);
+  }
+  60% {
+    opacity: 1;
+    transform: scale(1.05) translateY(0);
+  }
+  100% {
+    transform: scale(1) translateY(0);
+  }
+}
+
+.animate-bounce-in {
+  animation: bounce-in 0.6s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+}
+
+/* Slide up animation for volume controls */
+@keyframes slide-up {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.animate-slide-up {
+  animation: slide-up 0.4s ease-out;
+}
+
+/* Fade in animation */
+@keyframes fade-in {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+.animate-fade-in {
+  animation: fade-in 0.5s ease-in;
+}
+
+/* Pulse ring animation for sound cards */
+@keyframes pulse-ring {
+  0% {
+    box-shadow: 0 0 0 0 rgba(168, 85, 247, 0.7);
+  }
+  50% {
+    box-shadow: 0 0 0 8px rgba(168, 85, 247, 0);
+  }
+  100% {
+    box-shadow: 0 0 0 0 rgba(168, 85, 247, 0);
+  }
+}
+
+.animate-pulse-ring {
+  animation: pulse-ring 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+}
+
+/* Sound wave animation for playing indicator */
+@keyframes sound-wave {
+  0%, 100% {
+    height: 0.75rem;
+  }
+  50% {
+    height: 1rem;
+  }
+}
+
+.animate-sound-wave {
+  animation: sound-wave 0.6s ease-in-out infinite;
+}
+
+/* Glow pulse for free tier icons */
+@keyframes pulse-glow {
+  0%, 100% {
+    box-shadow: 0 0 10px rgba(14, 165, 233, 0.5);
+    transform: scale(1);
+  }
+  50% {
+    box-shadow: 0 0 20px rgba(14, 165, 233, 0.8);
+    transform: scale(1.05);
+  }
+}
+
+.animate-pulse-glow {
+  animation: pulse-glow 2s ease-in-out infinite;
+}
+
+/* Ping slow for save animation rings */
+@keyframes ping-slow {
+  0% {
+    transform: scale(1);
+    opacity: 0.8;
+  }
+  100% {
+    transform: scale(1.8);
+    opacity: 0;
+  }
+}
+
+.animate-ping-slow {
+  animation: ping-slow 2s cubic-bezier(0, 0, 0.2, 1) infinite;
+}
+
+/* Scale pulse for heart icon */
+@keyframes scale-pulse {
+  0%, 100% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.1);
+  }
+}
+
+.animate-scale-pulse {
+  animation: scale-pulse 1.5s ease-in-out infinite;
+}
+
+/* Sparkle animation */
+@keyframes sparkle {
+  0%, 100% {
+    opacity: 0;
+    transform: scale(0) rotate(0deg);
+  }
+  50% {
+    opacity: 1;
+    transform: scale(1) rotate(180deg);
+  }
+}
+
+.animate-sparkle {
+  animation: sparkle 2s ease-in-out infinite;
+}
+
+/* Spin bounce animation for dice roll */
+@keyframes spin-bounce {
+  0% {
+    transform: rotate(0deg) scale(1);
+  }
+  50% {
+    transform: rotate(180deg) scale(1.2);
+  }
+  100% {
+    transform: rotate(360deg) scale(1);
+  }
+}
+
+.animate-spin-slow {
+  animation: spin-bounce 0.6s ease-in-out;
+}
+
+/* Reduced motion support */
+@media (prefers-reduced-motion: reduce) {
+  .animate-rock,
+  .animate-bounce-in,
+  .animate-slide-up,
+  .animate-fade-in,
+  .animate-pulse-ring,
+  .animate-sound-wave,
+  .animate-pulse-glow,
+  .animate-ping-slow,
+  .animate-scale-pulse,
+  .animate-sparkle,
+  .animate-spin-slow {
+    animation: none;
+  }
+
+  /* Provide instant appearance for reduced motion */
+  .animate-bounce-in,
+  .animate-slide-up,
+  .animate-fade-in {
+    opacity: 1;
+    transform: none;
+  }
+}
+.no-select {
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+  -webkit-user-drag: none;
+  -moz-user-drag: none;
+  -o-user-drag: none;
+}
+
+/* Ensure buttons are always interactive and provide feedback on mobile */
+button, [role="button"] {
+  touch-action: manipulation;
+  -webkit-tap-highlight-color: transparent;
+  pointer-events: auto !important;
+}
+
+/* ===== Text overflow safety (prevents overlap on dense mobile grids) ===== */
+.text-clamp-1 {
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 1;
+  line-clamp: 1;
+  overflow: hidden;
+}
+
+.text-clamp-2 {
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
+  line-clamp: 2;
+  overflow: hidden;
+}
+
+/* Save Animation Dumb Terminal - RAF CSS Vars Mutation */
+.save-animation #outer-ring {
+  stroke: currentColor;
+  stroke-width: 4;
+  fill: none;
+  stroke-opacity: 0.2;
+  transform-origin: 64px 64px;
+  transform: scale(var(--outer-ring-scale, 1));
+  opacity: var(--outer-ring-opacity, 1);
+}
+
+.save-animation #middle-ring {
+  stroke: currentColor;
+  stroke-width: 3;
+  fill: none;
+  stroke-opacity: 0.3;
+  transform-origin: 64px 64px;
+  transform: scale(var(--middle-ring-scale, 1));
+  opacity: var(--middle-ring-opacity, 1);
+}
+
+.save-animation #heart-g {
+  transform-origin: center;
+  transform-box: fill-box;
+  transform: scale(var(--heart-scale, 1));
+  opacity: var(--heart-opacity, 1);
+}
+
+.save-animation .sparkle {
+  transform-origin: center;
+  transform-box: fill-box;
+  will-change: transform, opacity;
+}
+
+.save-animation .sparkle-0 {
+  opacity: var(--sparkle-0-opacity, 0);
+  transform: scale(var(--sparkle-0-scale, 0)) rotate(var(--sparkle-0-rotation, 0deg));
+}
+
+.save-animation .sparkle-1 {
+  opacity: var(--sparkle-1-opacity, 0);
+  transform: scale(var(--sparkle-1-scale, 0)) rotate(var(--sparkle-1-rotation, 0deg));
+}
+
+.save-animation .sparkle-2 {
+  opacity: var(--sparkle-2-opacity, 0);
+  transform: scale(var(--sparkle-2-scale, 0)) rotate(var(--sparkle-2-rotation, 0deg));
+}

@@ -1,0 +1,39 @@
+<examples>
+  <example name="subtask_delegation_message">
+    <description>
+      Example structure for the new_task message given to code-mode subtasks.
+    </description>
+    <template>
+      <![CDATA[
+## Subtask #1: Implement the first required feature with minimal regressions
+
+Background:
+- Summary of current behavior
+- Constraints (offline must remain functional)
+- Relevant prior findings
+
+Relevant files/folders:
+- app/
+- app/register-sw.ts
+- next.config.ts
+
+Context7 searches (do these before major changes):
+1) ...
+2) ...
+3) ...
+4) ...
+5) ...
+
+Rules:
+- Do not break existing features.
+- Do not break offline access.
+- Avoid unnecessary refactors.
+- Validate best practices with Context7 before major design changes.
+
+In attempt_completion:
+- List any issues you could not solve and why.
+- List all files created/edited/deleted.
+      ]]>
+    </template>
+  </example>
+</examples>

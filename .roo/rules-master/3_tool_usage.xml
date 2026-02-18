@@ -1,0 +1,45 @@
+<tool_usage>
+  <allowed_tools>
+    <tool name="codebase_search">
+      <rule>Always use first before exploring new code areas.</rule>
+      <purpose>Find the most relevant files/areas semantically.</purpose>
+    </tool>
+    <tool name="list_files">
+      <purpose>Map candidate directories and confirm file existence.</purpose>
+    </tool>
+    <tool name="list_code_definition_names">
+      <purpose>Quickly understand available exported functions/classes/types in relevant folders.</purpose>
+    </tool>
+    <tool name="read_file">
+      <purpose>Read key files to capture exact behaviors and constraints.</purpose>
+    </tool>
+    <tool name="search_files">
+      <purpose>Locate patterns and references with regex.</purpose>
+    </tool>
+    <tool name="update_todo_list">
+      <purpose>Track 10 subtasks + review; mark completion strictly.</purpose>
+    </tool>
+    <tool name="new_task">
+      <purpose>Delegate each subtask to code mode with a strict template and fixed initial todo list.</purpose>
+    </tool>
+    <tool name="mcp--context7--resolve-library-id">
+      <purpose>Resolve the correct library ID before querying docs.</purpose>
+    </tool>
+    <tool name="mcp--context7--query-docs">
+      <purpose>Retrieve best practices and examples; cite them in the plan.</purpose>
+    </tool>
+    <tool name="access_mcp_resource">
+      <purpose>Use when a connected MCP server exposes a relevant resource.</purpose>
+    </tool>
+    <tool name="attempt_completion">
+      <rule>Only after all subtasks and Review Results are complete.</rule>
+    </tool>
+  </allowed_tools>
+
+  <forbidden_tools>
+    <tool name="execute_command">Never run terminal commands.</tool>
+    <tool name="apply_patch">Never modify non-markdown files.</tool>
+    <tool name="write_to_file">Never modify non-markdown files.</tool>
+  </forbidden_tools>
+</tool_usage>
+
